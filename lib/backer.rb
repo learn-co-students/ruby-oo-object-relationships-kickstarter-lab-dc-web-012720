@@ -1,3 +1,5 @@
+require 'pry'
+
 class Backer
     attr_reader :name
 
@@ -7,9 +9,15 @@ class Backer
 
     def back_project(project)
         ProjectBacker.new(project, self)
+    end
+
+    def backed_projects 
         ProjectBacker.all.select do | x |
             x.backer == self
-        end
-    end
+        end.map do |y|
+            y.project
+        end 
+        # binding.pry
+    end 
 
 end
